@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad — VoiceScribe</title>
+    <meta name="description" content="Política de privacidad de VoiceScribe: qué datos se procesan, para qué, con quién se comparten y cómo ejercer tus derechos.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎙️</text></svg>">
+    <style>
+        :root { --primary-color:#6d28d9; --primary-color-light:#8b5cf6; --secondary-color:#f3f4f6; --text-color:#1f2937; --text-color-light:#6b7280; --white-color:#ffffff; --border-color:#e5e7eb; --header-height:80px; --border-radius:12px; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--text-color); margin:0; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        main { padding: 100px 0 40px; }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        h2 { font-size: 1.4rem; margin-top: 28px; margin-bottom: 10px; }
+        p, li { line-height: 1.7; }
+        .muted { color:var(--text-color-light); }
+        .box { background: var(--white-color); border:1px solid var(--border-color); border-radius: var(--border-radius); padding: 20px; }
+        .badge { display:inline-block; background:#eef2ff; color:#4338ca; border:1px solid #c7d2fe; padding:2px 8px; border-radius:999px; font-size:.8rem; margin-right:6px; }
+        a { color:var(--primary-color); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+
+        /* Header + Nav (coincide con index) */
+        .header { position: sticky; top:0; width:100%; background-color: rgba(255,255,255,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index:1000; height:var(--header-height); display:flex; align-items:center; border-bottom:1px solid var(--border-color); }
+        .nav { display:flex; justify-content:space-between; align-items:center; width:100%; }
+        .nav-brand { font-size:1.75rem; font-weight:800; color:var(--primary-color); text-decoration:none; flex-shrink:0; }
+        .nav-center { flex-grow:1; display:flex; justify-content:center; }
+        .nav-list { display:flex; align-items:center; list-style:none; gap:30px; }
+        .nav-link { text-decoration:none; color:var(--text-color-light); font-weight:500; transition:color .2s ease; font-size:.95rem; white-space:nowrap; }
+        .nav-link:hover, .nav-link.active { color:var(--primary-color); font-weight:600; }
+        .nav-right { flex-shrink:0; }
+        .btn { display:inline-block; padding: 12px 28px; border-radius: 12px; text-decoration:none; font-weight:600; transition:all .3s ease; border:1px solid transparent; }
+        .btn-primary { background-color: var(--primary-color); color: var(--white-color); }
+        .btn-primary:hover { background-color: var(--primary-color-light); }
+        .nav-toggle { display:none; cursor:pointer; border:none; background:transparent; z-index:1001; padding:10px; }
+        .nav-toggle span { display:block; width:25px; height:2px; background-color:var(--primary-color); margin:6px 0; transition:all .3s ease-in-out; border-radius:2px; }
+        .nav-mobile-menu { display:none; position:absolute; top:var(--header-height); left:0; width:100%; background-color:var(--white-color); flex-direction:column; gap:0; box-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border-top:1px solid var(--border-color); padding-bottom:20px; }
+        .nav-mobile-menu.active { display:flex; }
+        /* Footer */
+        .footer { text-align: center; padding: 40px 20px; background-color: var(--secondary-color); color: var(--text-color-light); font-size: 0.9rem; }
+        .footer-links { margin-top: 12px; }
+        .footer-links a { color: var(--text-color); text-decoration: none; margin: 0 8px; }
+        .footer-links a:hover { text-decoration: underline; }
+        .lang-switcher { margin-top: 20px; }
+        .lang-switcher button { background: none; border: 1px solid var(--border-color); color: var(--text-color-light); padding: 5px 10px; cursor: pointer; border-radius: 5px; margin: 0 5px; transition: all 0.2s ease; }
+        .lang-switcher button.active, .lang-switcher button:hover { background-color: var(--primary-color); color: var(--white-color); border-color: var(--primary-color); }
+        @media (max-width: 992px) {
+            .nav-center, .nav-right { display:none; }
+            .nav-toggle { display:block; }
+            .nav-mobile-menu .nav-list { flex-direction:column; width:100%; gap:0; }
+            .nav-mobile-menu .nav-list li { width:100%; text-align:center; }
+            .nav-mobile-menu .nav-link { display:block; padding:15px; border-bottom:1px solid var(--border-color); }
+            .nav-mobile-menu .nav-cta { margin:20px auto 0; display:block; width:fit-content; }
+        }
+    </style>
+</head>
+    <body>
+    <!-- Header / Menu -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="nav-brand">VoiceScribe</a>
+                <div class="nav-center">
+                    <ul class="nav-list">
+                        <li><a class="nav-link" href="index.html#features">Características</a></li>
+                        <li><a class="nav-link" href="index.html#how">Cómo funciona</a></li>
+                        <li><a class="nav-link" href="index.html#requirements">Requisitos</a></li>
+                        <li><a class="nav-link" href="index.html#faq">FAQs</a></li>
+                        <li><a class="nav-link" href="privacy.html">Privacidad</a></li>
+                        <li><a class="nav-link" href="index.html#support">Soporte</a></li>
+                    </ul>
+                </div>
+                <div class="nav-right">
+                    <a href="index.html#cta" class="btn btn-primary nav-cta">Añadir a Chrome</a>
+                </div>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu toggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+        <div class="nav-mobile-menu" id="navMobileMenu">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="index.html#features">Características</a></li>
+                <li><a class="nav-link" href="index.html#how">Cómo funciona</a></li>
+                <li><a class="nav-link" href="index.html#requirements">Requisitos</a></li>
+                <li><a class="nav-link" href="index.html#faq">FAQs</a></li>
+                <li><a class="nav-link" href="privacy.html">Privacidad</a></li>
+                <li><a class="nav-link" href="index.html#support">Soporte</a></li>
+            </ul>
+            <a href="index.html#cta" class="btn btn-primary nav-cta">Añadir a Chrome</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Política de Privacidad</h1>
+        <p class="muted">Última actualización: 13 ago 2025</p>
+
+        <div class="box">
+            <p>
+                VoiceScribe es una extensión/aplicación que transcribe tu voz a texto y, de forma opcional, genera resúmenes con IA usando tu propia clave de OpenAI.
+                Priorizamos tu privacidad: no operamos servidores propios para procesar tu audio ni tus notas.
+            </p>
+        </div>
+
+        <h2>Resumen corto</h2>
+        <ul>
+            <li>No recopilamos datos personales ni analizamos tu uso con herramientas de terceros.</li>
+            <li>El audio del micrófono se procesa localmente por tu navegador y no se sube.</li>
+            <li>El texto transcrito y los resúmenes se guardan localmente en tu dispositivo.</li>
+            <li>Si habilitas la IA, el texto se envía a <code>api.openai.com</code> exclusivamente para generar el resumen, usando tu clave y vía HTTPS.</li>
+            <li>No vendemos datos, no los transferimos para fines no relacionados y no realizamos actividades de perfilado crediticio.</li>
+        </ul>
+
+        <h2>Categorías de datos de usuario</h2>
+        <p>Según las categorías de Google/Chrome Web Store:</p>
+        <ul>
+            <li><strong>Información personal, salud, financiera, autenticación, comunicaciones personales, ubicación:</strong> no recopilamos.</li>
+            <li><strong>Historial web, actividad del usuario:</strong> no recopilamos ni rastreamos.</li>
+            <li><strong>Contenido de sitios web:</strong> solo el texto que tú dictas o pegas dentro de la app. Se almacena localmente y puedes borrarlo en cualquier momento.</li>
+        </ul>
+
+        <h2>Permisos y finalidad</h2>
+        <ul>
+            <li><strong>Micrófono (getUserMedia):</strong> convertir voz a texto localmente mediante APIs del navegador.</li>
+            <li><strong>Almacenamiento local (por ejemplo, chrome.storage/local o localStorage):</strong> guardar tus notas y resúmenes en tu dispositivo.</li>
+            <li><strong>Conexión a Internet:</strong> únicamente necesaria si activas la función opcional de resumen con IA.</li>
+        </ul>
+
+        <h2>Transferencias y terceros</h2>
+        <ul>
+            <li>No compartimos tus datos con terceros para marketing ni analítica.</li>
+            <li>Proveedor opcional: <strong>OpenAI</strong> para generar resúmenes. Se envía el texto que selecciones; no enviamos audio. La clave es tuya y se gestiona localmente.</li>
+        </ul>
+
+        <h2>Retención y control</h2>
+        <ul>
+            <li>Puedes eliminar todas las notas desde la opción “Limpiar Todo”.</li>
+            <li>Al desinstalar la app/extensión, el almacenamiento local relacionado se elimina.</li>
+        </ul>
+
+        <h2>Seguridad</h2>
+        <p>Las comunicaciones con servicios externos (si se usan) ocurren sobre HTTPS. No mantenemos servidores propios con tus datos.</p>
+
+        <h2>Certificaciones para la publicación</h2>
+        <ul>
+            <li>No vendemos ni transferimos datos de usuarios a terceros, excepto lo estrictamente necesario para la función opcional de IA descrita arriba.</li>
+            <li>No usamos ni transferimos datos para propósitos no relacionados con la funcionalidad principal.</li>
+            <li>No usamos ni transferimos datos para determinar solvencia ni realizar actividades crediticias.</li>
+        </ul>
+
+        <h2>Menores</h2>
+        <p>El producto no está dirigido específicamente a menores de 13 años y no recopilamos conscientemente datos de menores.</p>
+
+        <h2>Cambios</h2>
+        <p>Podemos actualizar esta política. Publicaremos la nueva versión en esta misma URL e indicaremos la fecha de vigencia.</p>
+
+        <h2>Contacto</h2>
+        <p>Para preguntas o solicitudes de privacidad, escribe a <a href="mailto:soporte@example.com">soporte@example.com</a>.</p>
+
+        <p><a href="index.html">← Volver a la página principal</a></p>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VoiceScribe. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Política de Privacidad</a>
+                <a href="terms.html">Términos de Servicio</a>
+            </div>
+            <div class="lang-switcher">
+                <button>ES</button>
+                <button>EN</button>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navMobileMenu = document.getElementById('navMobileMenu');
+        if (navToggle && navMobileMenu) {
+            navToggle.addEventListener('click', () => {
+                navMobileMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+            document.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMobileMenu.classList.contains('active')) {
+                        navMobileMenu.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+
+

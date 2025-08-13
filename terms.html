@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos de Servicio — VoiceScribe</title>
+    <meta name="description" content="Términos de servicio de VoiceScribe.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎙️</text></svg>">
+    <style>
+        :root { --primary-color:#6d28d9; --primary-color-light:#8b5cf6; --secondary-color:#f3f4f6; --text-color:#1f2937; --text-color-light:#6b7280; --white-color:#ffffff; --border-color:#e5e7eb; --header-height:80px; --border-radius:12px; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--text-color); margin:0; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        main { padding: 100px 0 40px; }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        h2 { font-size: 1.4rem; margin-top: 28px; margin-bottom: 10px; }
+        p, li { line-height: 1.7; }
+        a { color:var(--primary-color); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+
+        /* Header + Nav (coincide con index) */
+        .header { position: sticky; top:0; width:100%; background-color: rgba(255,255,255,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index:1000; height:var(--header-height); display:flex; align-items:center; border-bottom:1px solid var(--border-color); }
+        .nav { display:flex; justify-content:space-between; align-items:center; width:100%; }
+        .nav-brand { font-size:1.75rem; font-weight:800; color:var(--primary-color); text-decoration:none; flex-shrink:0; }
+        .nav-center { flex-grow:1; display:flex; justify-content:center; }
+        .nav-list { display:flex; align-items:center; list-style:none; gap:30px; }
+        .nav-link { text-decoration:none; color:var(--text-color-light); font-weight:500; transition:color .2s ease; font-size:.95rem; white-space:nowrap; }
+        .nav-link:hover, .nav-link.active { color:var(--primary-color); font-weight:600; }
+        .nav-right { flex-shrink:0; }
+        .btn { display:inline-block; padding: 12px 28px; border-radius: 12px; text-decoration:none; font-weight:600; transition:all .3s ease; border:1px solid transparent; }
+        .btn-primary { background-color: var(--primary-color); color: var(--white-color); }
+        .btn-primary:hover { background-color: var(--primary-color-light); }
+        .nav-toggle { display:none; cursor:pointer; border:none; background:transparent; z-index:1001; padding:10px; }
+        .nav-toggle span { display:block; width:25px; height:2px; background-color:var(--primary-color); margin:6px 0; transition:all .3s ease-in-out; border-radius:2px; }
+        .nav-mobile-menu { display:none; position:absolute; top:var(--header-height); left:0; width:100%; background-color:var(--white-color); flex-direction:column; gap:0; box-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border-top:1px solid var(--border-color); padding-bottom:20px; }
+        .nav-mobile-menu.active { display:flex; }
+        /* Footer */
+        .footer { text-align: center; padding: 40px 20px; background-color: var(--secondary-color); color: var(--text-color-light); font-size: 0.9rem; }
+        .footer-links { margin-top: 12px; }
+        .footer-links a { color: var(--text-color); text-decoration: none; margin: 0 8px; }
+        .footer-links a:hover { text-decoration: underline; }
+        .lang-switcher { margin-top: 20px; }
+        .lang-switcher button { background: none; border: 1px solid var(--border-color); color: var(--text-color-light); padding: 5px 10px; cursor: pointer; border-radius: 5px; margin: 0 5px; transition: all 0.2s ease; }
+        .lang-switcher button.active, .lang-switcher button:hover { background-color: var(--primary-color); color: var(--white-color); border-color: var(--primary-color); }
+        @media (max-width: 992px) {
+            .nav-center, .nav-right { display:none; }
+            .nav-toggle { display:block; }
+            .nav-mobile-menu .nav-list { flex-direction:column; width:100%; gap:0; }
+            .nav-mobile-menu .nav-list li { width:100%; text-align:center; }
+            .nav-mobile-menu .nav-link { display:block; padding:15px; border-bottom:1px solid var(--border-color); }
+            .nav-mobile-menu .nav-cta { margin:20px auto 0; display:block; width:fit-content; }
+        }
+    </style>
+    </head>
+<body>
+    <!-- Header / Menu -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="nav-brand">VoiceScribe</a>
+                <div class="nav-center">
+                    <ul class="nav-list">
+                        <li><a class="nav-link" href="index.html#features">Características</a></li>
+                        <li><a class="nav-link" href="index.html#how">Cómo funciona</a></li>
+                        <li><a class="nav-link" href="index.html#requirements">Requisitos</a></li>
+                        <li><a class="nav-link" href="index.html#faq">FAQs</a></li>
+                        <li><a class="nav-link" href="privacy.html">Privacidad</a></li>
+                        <li><a class="nav-link" href="index.html#support">Soporte</a></li>
+                    </ul>
+                </div>
+                <div class="nav-right">
+                    <a href="index.html#cta" class="btn btn-primary nav-cta">Añadir a Chrome</a>
+                </div>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu toggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+        <div class="nav-mobile-menu" id="navMobileMenu">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="index.html#features">Características</a></li>
+                <li><a class="nav-link" href="index.html#how">Cómo funciona</a></li>
+                <li><a class="nav-link" href="index.html#requirements">Requisitos</a></li>
+                <li><a class="nav-link" href="index.html#faq">FAQs</a></li>
+                <li><a class="nav-link" href="privacy.html">Privacidad</a></li>
+                <li><a class="nav-link" href="index.html#support">Soporte</a></li>
+            </ul>
+            <a href="index.html#cta" class="btn btn-primary nav-cta">Añadir a Chrome</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Términos de Servicio</h1>
+        <p>Al usar VoiceScribe aceptas estos términos. Si no estás de acuerdo, no uses la aplicación.</p>
+
+        <h2>Licencia</h2>
+        <p>Te concedemos una licencia personal, no transferible y revocable para usar la app con su funcionalidad actual.</p>
+
+        <h2>Uso aceptable</h2>
+        <ul>
+            <li>No intentes descompilar ni eludir medidas de seguridad.</li>
+            <li>No uses la app para infringir derechos de terceros o leyes aplicables.</li>
+        </ul>
+
+        <h2>Funcionalidad y disponibilidad</h2>
+        <p>La app se ofrece “tal cual”. Podríamos actualizar o interrumpir funciones sin previo aviso.</p>
+
+        <h2>Servicios de terceros</h2>
+        <p>La función opcional de IA puede usar OpenAI. Tu uso se rige también por los términos del proveedor correspondiente.</p>
+
+        <h2>Limitación de responsabilidad</h2>
+        <p>En la medida permitida por ley, no seremos responsables por pérdidas indirectas, incidentales o consecuentes derivadas del uso de la app.</p>
+
+        <h2>Contacto</h2>
+        <p>soporte@example.com</p>
+
+        <p><a href="index.html">← Volver a la página principal</a></p>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VoiceScribe. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Política de Privacidad</a>
+                <a href="terms.html">Términos de Servicio</a>
+            </div>
+            <div class="lang-switcher">
+                <button>ES</button>
+                <button>EN</button>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navMobileMenu = document.getElementById('navMobileMenu');
+        if (navToggle && navMobileMenu) {
+            navToggle.addEventListener('click', () => {
+                navMobileMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+            document.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMobileMenu.classList.contains('active')) {
+                        navMobileMenu.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+
+

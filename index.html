@@ -137,7 +137,7 @@
             display: flex;
             align-items: center;
             list-style: none;
-            gap: 30px;
+            gap: 24px;
         }
 
         .nav-link {
@@ -145,8 +145,10 @@
             color: var(--text-color-light);
             font-weight: 500;
             transition: color 0.2s ease;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             white-space: nowrap;
+            padding: 8px 12px;
+            border-radius: 6px;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -211,6 +213,7 @@
             line-height: 1.2;
             background: -webkit-linear-gradient(45deg, #333, var(--primary-color));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -268,6 +271,76 @@
             font-weight: 700;
             margin-bottom: 10px;
         }
+		/* Rich feature cards (icons + bullets) */
+		.feature-card--rich {
+			text-align: left;
+			padding: 32px 28px;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			background: linear-gradient(145deg, #ffffff, #f8fafc);
+			border: 2px solid transparent;
+			background-clip: padding-box;
+			position: relative;
+			overflow: hidden;
+		}
+		.feature-card--rich::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 4px;
+			background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+		}
+		.feature-header {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+		}
+		.feature-icon {
+			width: 64px;
+			height: 64px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 16px;
+			background: linear-gradient(135deg, var(--primary-color), var(--primary-color-light));
+			color: #ffffff;
+			box-shadow: 0 12px 24px rgba(109,40,217,0.25);
+			position: relative;
+			flex-shrink: 0;
+		}
+		.feature-icon svg { width: 32px; height: 32px; stroke: currentColor; }
+		.feature-emoji {
+			font-size: 32px;
+			line-height: 1;
+			margin-right: 12px;
+		}
+		.feature-card--rich h3 {
+			margin: 0;
+			font-size: 1.4rem;
+			font-weight: 700;
+			color: var(--text-color);
+		}
+		.feature-card--rich p { 
+			color: var(--text-color-light); 
+			font-size: 1rem;
+			line-height: 1.6;
+			margin: 0;
+		}
+		.feature-list { 
+			margin: 8px 0 0 0; 
+			padding-left: 20px; 
+			color: var(--text-color-light);
+		}
+		.feature-list li { 
+			margin-bottom: 8px; 
+			position: relative;
+		}
+		.feature-list li::marker {
+			color: var(--primary-color);
+		}
 
         /* --- How It Works Section --- */
         .how-steps {
@@ -417,6 +490,9 @@
             color: var(--text-color-light);
             font-size: 0.9rem;
         }
+        .footer-links { margin-top: 12px; }
+        .footer-links a { color: var(--text-color); text-decoration: none; margin: 0 8px; }
+        .footer-links a:hover { text-decoration: underline; }
         .lang-switcher { margin-top: 20px; }
         .lang-switcher button {
             background: none;
@@ -436,7 +512,17 @@
         }
 
         /* --- Responsive Design --- */
-        @media (max-width: 992px) {
+        @media (max-width: 1200px) {
+            .nav-list {
+                gap: 18px;
+            }
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
             .nav-center, .nav-right {
                 display: none;
             }
@@ -460,6 +546,7 @@
                 display: block;
                 padding: 15px;
                 border-bottom: 1px solid var(--border-color);
+                font-size: 1rem;
             }
             .nav-mobile-menu .nav-cta {
                 margin: 20px auto 0;
@@ -492,7 +579,8 @@
                         <li><a href="#how" class="nav-link" data-translate-key="nav_how">Cómo funciona</a></li>
                         <li><a href="#requirements" class="nav-link" data-translate-key="nav_requirements">Requisitos</a></li>
                         <li><a href="#faq" class="nav-link" data-translate-key="nav_faq">FAQs</a></li>
-                        <li><a href="#privacy" class="nav-link" data-translate-key="nav_privacy">Privacidad</a></li>
+                        <li><a href="#pricing" class="nav-link" data-translate-key="nav_pricing">Precios / IA</a></li>
+                        <li><a href="privacy.html" class="nav-link" data-translate-key="nav_privacy">Privacidad</a></li>
                         <li><a href="#support" class="nav-link" data-translate-key="nav_support">Soporte</a></li>
                     </ul>
                 </div>
@@ -515,7 +603,8 @@
                 <li><a href="#how" class="nav-link" data-translate-key="nav_how">Cómo funciona</a></li>
                 <li><a href="#requirements" class="nav-link" data-translate-key="nav_requirements">Requisitos</a></li>
                 <li><a href="#faq" class="nav-link" data-translate-key="nav_faq">FAQs</a></li>
-                <li><a href="#privacy" class="nav-link" data-translate-key="nav_privacy">Privacidad</a></li>
+                <li><a href="#pricing" class="nav-link" data-translate-key="nav_pricing">Precios / IA</a></li>
+                <li><a href="privacy.html" class="nav-link" data-translate-key="nav_privacy">Privacidad</a></li>
                 <li><a href="#support" class="nav-link" data-translate-key="nav_support">Soporte</a></li>
             </ul>
             <a href="#cta" class="btn btn-primary nav-cta" data-translate-key="nav_cta">Añadir a Chrome</a>
@@ -526,38 +615,165 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <h1 data-translate-key="hero_h1">Transcribe tu voz y obtén resúmenes al instante</h1>
-                <p class="sub" data-translate-key="hero_sub">Habla, edita y comparte en segundos. Tu contenido se mantiene en tu dispositivo; la IA es opcional.</p>
+                <h1 data-translate-key="hero_h1">Transcripción y resúmenes al instante, con o sin IA.</h1>
+                <p class="sub" data-translate-key="hero_sub">Convierte tu voz en texto y obtén resúmenes inteligentes. Funciona de forma local y privada, o conéctalo a tu cuenta de OpenAI para potenciarlo. Tú decides.</p>
                 <div class="hero-ctas">
-                    <a href="#requirements" class="btn btn-primary" data-translate-key="hero_cta_primary">Añadir a Chrome</a>
-                    <a href="#how" class="btn btn-secondary" data-translate-key="hero_cta_secondary">Ver cómo funciona</a>
+                    <a href="#requirements" class="btn btn-primary" data-translate-key="hero_cta_primary">Añadir a Chrome — Es Gratis</a>
+                    <a href="#pricing" class="btn btn-secondary" data-translate-key="hero_cta_secondary">¿Cómo funciona la IA?</a>
                 </div>
                 <div class="hero-media">
-                    <img src="https://placehold.co/800x450/6d28d9/ffffff?text=Vista+previa+de+VoiceScribe" alt="Vista previa de VoiceScribe en uso" loading="lazy" data-translate-key="hero_media_alt">
+                    <img src="https://placehold.co/800x450/6d28d9/ffffff?text=Video%2FGIF+%E2%80%94+VoiceScribe+en+acci%C3%B3n" alt="Vista previa (reemplaza por GIF o video mostrando el micrófono, texto en tiempo real y resumen)" loading="lazy" data-translate-key="hero_media_alt">
                 </div>
             </div>
         </section>
 
+
+
         <!-- Features Section -->
         <section id="features">
             <div class="container">
-                <h2 class="section-title" data-translate-key="features_title">Todo lo que necesitas para tomar notas con la voz</h2>
+                <h2 class="section-title" data-translate-key="features_title">Potencia tu Productividad con Funciones Inteligentes</h2>
+                <p style="text-align:center; color: var(--text-color-light); margin: -10px auto 30px; max-width: 720px;" data-translate-key="features_sub">Diseñado para ser rápido, privado y darte el control total.</p>
+
                 <div class="features-grid">
-                    <div class="feature-card">
-                        <h3 data-translate-key="feature_1_title">Transcripción en tiempo real</h3>
-                        <p data-translate-key="feature_1_text">Convierte tu voz a texto al momento con detección de frases.</p>
+                    <div class="feature-card feature-card--rich">
+                        <div class="feature-header">
+                            <span class="feature-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 3v10a4 4 0 1 1-8 0V9" stroke-width="1.8"/>
+                                    <rect x="10" y="5" width="8" height="6" rx="3" stroke-width="1.8"/>
+                                    <path d="M12 17v3M8 20h8" stroke-width="1.8"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <h3 data-translate-key="feature_1_title"><span class="feature-emoji">🎙️</span>Transcripción en Tiempo Real</h3>
+                            </div>
+                        </div>
+                        <p data-translate-key="feature_1_text">Habla y mira cómo tus palabras se convierten en texto al instante. Ideal para capturar ideas sobre la marcha sin interrumpir tu flujo de trabajo.</p>
+                        <ul class="feature-list">
+                            <li data-translate-key="feature_1_b1">Compatible con puntuación automática y conteo en vivo.</li>
+                            <li data-translate-key="feature_1_b2">Edición directa mientras hablas.</li>
+                            <li data-translate-key="feature_1_b3">Optimizado para bajo uso de CPU.</li>
+                        </ul>
                     </div>
-                    <div class="feature-card">
-                        <h3 data-translate-key="feature_2_title">Resumen con IA</h3>
-                        <p data-translate-key="feature_2_text">Obtén resúmenes claros en estilos general, puntos clave o detallado.</p>
+
+                    <div class="feature-card feature-card--rich">
+                        <div class="feature-header">
+                            <span class="feature-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 3l2.2 4.6 5.1.7-3.7 3.6.9 5.1L12 14.8 7.5 17l.9-5.1L4.7 8.3l5.1-.7L12 3z" stroke-width="1.8"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <h3 data-translate-key="feature_2_title"><span class="feature-emoji">✨</span>Resúmenes con IA</h3>
+                            </div>
+                        </div>
+                        <p data-translate-key="feature_2_text">Transforma textos largos en resúmenes claros, puntos clave o listas detalladas. Ahorra horas de revisión y análisis.</p>
+                        <ul class="feature-list">
+                            <li data-translate-key="feature_2_b1">Varios estilos: general, bullets o detallado.</li>
+                            <li data-translate-key="feature_2_b2">Elige modelo y longitud del resultado.</li>
+                            <li data-translate-key="feature_2_b3">Todo bajo tu propia clave de OpenAI.</li>
+                        </ul>
                     </div>
-                    <div class="feature-card">
-                        <h3 data-translate-key="feature_3_title">Exporta y comparte</h3>
-                        <p data-translate-key="feature_3_text">Guarda como TXT o copia al portapapeles en un clic.</p>
+
+                    <div class="feature-card feature-card--rich">
+                        <div class="feature-header">
+                            <span class="feature-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke-width="1.8"/>
+                                    <path d="M14 3v5h5" stroke-width="1.8"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <h3 data-translate-key="feature_3_title"><span class="feature-emoji">📄</span>Exporta y Comparte</h3>
+                            </div>
+                        </div>
+                        <p data-translate-key="feature_3_text">Guarda tus transcripciones completas o resúmenes como archivo .TXT o cópialos directamente a tu portapapeles con un solo clic.</p>
+                        <ul class="feature-list">
+                            <li data-translate-key="feature_3_b1">Exportación .TXT limpia y ordenada.</li>
+                            <li data-translate-key="feature_3_b2">Copiado rápido con formato conservado.</li>
+                            <li data-translate-key="feature_3_b3">Atajos de teclado para mayor velocidad.</li>
+                        </ul>
                     </div>
-                    <div class="feature-card">
-                        <h3 data-translate-key="feature_4_title">Privacidad primero</h3>
-                        <p data-translate-key="feature_4_text">El audio no se sube. La IA es opcional y usa tu clave.</p>
+
+                    <div class="feature-card feature-card--rich">
+                        <div class="feature-header">
+                            <span class="feature-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="8" width="18" height="12" rx="2" stroke-width="1.8"/>
+                                    <path d="M7 8V6a5 5 0 1 1 10 0v2" stroke-width="1.8"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <h3 data-translate-key="feature_4_title"><span class="feature-emoji">🔒</span>Privacidad por Diseño</h3>
+                            </div>
+                        </div>
+                        <p data-translate-key="feature_4_text">Tu voz y tus textos se procesan localmente en tu navegador. Nada se sube a nuestros servidores. Tus datos son solo tuyos.</p>
+                        <ul class="feature-list">
+                            <li data-translate-key="feature_4_b1">Procesamiento local en el navegador.</li>
+                            <li data-translate-key="feature_4_b2">Sin telemetría ni tracking oculto.</li>
+                            <li data-translate-key="feature_4_b3">Controlas qué se guarda y cuándo borrar.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card feature-card--rich">
+                        <div class="feature-header">
+                            <span class="feature-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 7a4 4 0 1 0-6 3.46V14l3 2 3-2v-3.54A4 4 0 0 0 15 7z" stroke-width="1.8"/>
+                                    <path d="M12 16v4" stroke-width="1.8"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <h3 data-translate-key="feature_5_title"><span class="feature-emoji">🔑</span>Control Total de la IA</h3>
+                            </div>
+                        </div>
+                        <p data-translate-key="feature_5_text">Usa tu propia clave de OpenAI para activar las funciones inteligentes. Sin suscripciones. Tú controlas el uso y los costos.</p>
+                        <ul class="feature-list">
+                            <li data-translate-key="feature_5_b1">Configura tu clave API en segundos.</li>
+                            <li data-translate-key="feature_5_b2">Límites y costos bajo tu control.</li>
+                            <li data-translate-key="feature_5_b3">Funciona sin IA si así lo prefieres.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card feature-card--rich">
+                        <div class="feature-header">
+                            <span class="feature-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 13l18-6-8 14-2-6-6-2z" stroke-width="1.8"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <h3 data-translate-key="feature_6_title"><span class="feature-emoji">✈️</span>Funciona sin Conexión</h3>
+                            </div>
+                        </div>
+                        <p data-translate-key="feature_6_text">La función de transcripción de voz a texto está disponible incluso sin conexión a internet, para que puedas tomar notas en cualquier lugar.</p>
+                        <ul class="feature-list">
+                            <li data-translate-key="feature_6_b1">Ideal para viajes o zonas con mala señal.</li>
+                            <li data-translate-key="feature_6_b2">No depende de servidores externos.</li>
+                            <li data-translate-key="feature_6_b3">Reintentos y guardado local seguros.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing / AI Section -->
+        <section id="pricing">
+            <div class="container">
+                <h2 class="section-title">Tú tienes el control de la IA y los costos</h2>
+                <p style="text-align: center; color: var(--text-color-light); margin: -10px auto 40px; max-width: 600px;">Sin suscripciones ni sorpresas. Usa la extensión a tu manera.</p>
+                
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px; padding: 25px; border-radius: 12px; background-color: #f7f5ff;">
+                        <p style="font-size: 2rem; margin: 0;">✅</p>
+                        <h3 style="margin-top: 10px;">La Extensión es Gratis</h3>
+                        <p>Usa la transcripción en tiempo real, el editor de texto y la función de exportar sin ningún costo. Para siempre.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 300px; padding: 25px; border-radius: 12px; background-color: #f7f5ff;">
+                        <p style="font-size: 2rem; margin: 0;">🔑</p>
+                        <h3 style="margin-top: 10px;">La IA es Opcional (BYOK)</h3>
+                        <p>"Bring Your Own Key". Conecta tu clave de OpenAI para activar los resúmenes inteligentes. Solo pagas por lo que usas, directamente a ellos.</p>
                     </div>
                 </div>
             </div>
@@ -566,22 +782,24 @@
         <!-- How It Works Section -->
         <section id="how">
             <div class="container">
-                <h2 class="section-title" data-translate-key="how_title">Cómo funciona</h2>
-                <div class="how-steps">
-                    <div class="how-step">
-                        <div class="step-number">1</div>
-                        <h3 data-translate-key="how_step_1_title">Inicia la grabación</h3>
-                        <p data-translate-key="how_step_1_text">Concede acceso al micrófono y pulsa “Iniciar”.</p>
+                <h2 class="section-title">Empieza a transcribir en 3 simples pasos</h2>
+                <div style="display: flex; text-align: center; gap: 30px; flex-wrap: wrap; margin-top: 40px;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <p style="font-size: 3rem; font-weight: bold; color: #8A2BE2; margin:0;">1</p>
+                        <h3 style="margin-top: 10px;">Inicia la grabación</h3>
+                        <p>Concede acceso al micrófono, pulsa "Iniciar" y simplemente empieza a hablar.</p>
                     </div>
-                    <div class="how-step">
-                        <div class="step-number">2</div>
-                        <h3 data-translate-key="how_step_2_title">Revisa el texto</h3>
-                        <p data-translate-key="how_step_2_text">Edita mientras ves el conteo de palabras en vivo.</p>
+
+                    <div style="flex: 1; min-width: 250px;">
+                        <p style="font-size: 3rem; font-weight: bold; color: #8A2BE2; margin:0;">2</p>
+                        <h3 style="margin-top: 10px;">Revisa el texto en vivo</h3>
+                        <p>Tu voz se convierte en texto al instante. Puedes editar y corregir mientras hablas o al finalizar.</p>
                     </div>
-                    <div class="how-step">
-                        <div class="step-number">3</div>
-                        <h3 data-translate-key="how_step_3_title">Resume y exporta</h3>
-                        <p data-translate-key="how_step_3_text">Genera un resumen con IA y guarda o copia tu nota.</p>
+
+                    <div style="flex: 1; min-width: 250px;">
+                        <p style="font-size: 3rem; font-weight: bold; color: #8A2BE2; margin:0;">3</p>
+                        <h3 style="margin-top: 10px;">Resume y exporta</h3>
+                        <p>Genera un resumen con IA, copia el texto o guarda tu nota como .TXT con un solo clic.</p>
                     </div>
                 </div>
             </div>
@@ -590,23 +808,30 @@
         <!-- Requirements Section -->
         <section id="requirements">
             <div class="container">
-                <h2 class="section-title" data-translate-key="req_title">Requisitos y permisos</h2>
-                <div class="requirements-grid">
-                    <div class="requirement-item">
-                        <h3 data-translate-key="req_1_title">Navegador</h3>
-                        <p data-translate-key="req_1_text">Chrome 109+ o Edge 109+ con soporte de reconocimiento de voz.</p>
+                <h2 class="section-title">Requisitos y Permisos Claros</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                    <div style="padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; background-color: var(--white-color);">
+                        <p style="font-size: 1.5rem;">🌐</p>
+                        <strong>Navegador</strong>
+                        <p>Chrome 106+, Edge 106+ o cualquier navegador basado en Chromium.</p>
                     </div>
-                    <div class="requirement-item">
-                        <h3 data-translate-key="req_2_title">Permisos</h3>
-                        <p data-translate-key="req_2_text">Micrófono (del navegador), almacenamiento local y ventana auxiliar para permisos.</p>
+
+                    <div style="padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; background-color: var(--white-color);">
+                        <p style="font-size: 1.5rem;">🎙️</p>
+                        <strong>Permisos</strong>
+                        <p>Necesita acceso a tu micrófono para poder transcribir. ¡Nada más!</p>
                     </div>
-                    <div class="requirement-item">
-                        <h3 data-translate-key="req_3_title">Conexión</h3>
-                        <p data-translate-key="req_3_text">Internet solo para la función de resumen con IA (opcional).</p>
+
+                    <div style="padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; background-color: var(--white-color);">
+                        <p style="font-size: 1.5rem;">📶</p>
+                        <strong>Conexión</strong>
+                        <p>Internet es necesario solo si quieres usar los resúmenes con IA. La transcripción funciona sin conexión.</p>
                     </div>
-                    <div class="requirement-item">
-                        <h3 data-translate-key="req_4_title">Privacidad</h3>
-                        <p data-translate-key="req_4_text">El texto se guarda localmente. Consulta la política de privacidad.</p>
+
+                    <div style="padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; background-color: var(--white-color);">
+                        <p style="font-size: 1.5rem;">🔒</p>
+                        <strong>Privacidad</strong>
+                        <p>Tus datos se guardan y procesan localmente. Consulta nuestra política de privacidad para más detalles.</p>
                     </div>
                 </div>
             </div>
@@ -615,11 +840,11 @@
         <!-- Screens Section -->
         <section id="screens">
             <div class="container">
-                <h2 class="section-title" data-translate-key="screens_title">Una interfaz simple para trabajar rápido</h2>
-                <div class="gallery-grid">
-                    <img src="https://placehold.co/600x400/f3f4f6/1f2937?text=Interfaz+de+grabación" alt="Interfaz de grabación" loading="lazy" data-translate-key="screens_1_alt">
-                    <img src="https://placehold.co/600x400/f3f4f6/1f2937?text=Texto+transcrito" alt="Texto transcrito en pantalla" loading="lazy" data-translate-key="screens_2_alt">
-                    <img src="https://placehold.co/600x400/f3f4f6/1f2937?text=Resumen+con+IA" alt="Generación de resumen con IA" loading="lazy" data-translate-key="screens_3_alt">
+                <h2 class="section-title">Una interfaz simple para trabajar rápido</h2>
+                <p style="text-align: center; color: var(--text-color-light); margin: -10px auto 30px; max-width: 600px;">Sin distracciones. Solo las herramientas que necesitas para concentrarte en tus ideas.</p>
+                
+                <div style="margin-top: 30px; padding: 20px; border-radius: 12px; background-color: #f7f5ff; text-align: center;">
+                    <img src="https://placehold.co/800x500/6d28d9/ffffff?text=Captura+de+Pantalla+Real+de+VoiceScribe+%0A%0AMicrófono+%7C+Texto+en+Vivo+%7C+Botón+IA+%7C+Exportar" alt="Interfaz de VoiceScribe mostrando la transcripción en tiempo real" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                 </div>
             </div>
         </section>
@@ -627,27 +852,46 @@
         <!-- FAQ Section -->
         <section id="faq">
             <div class="container">
-                <h2 class="section-title" data-translate-key="faq_title">Preguntas frecuentes</h2>
+                <h2 class="section-title">Preguntas Frecuentes</h2>
                 <div class="faq-container">
-                    <details class="faq-item">
-                        <summary data-translate-key="faq_1_q">¿La extensión es gratis?</summary>
-                        <p data-translate-key="faq_1_a">Sí. La transcripción es gratuita. La IA es opcional y usa tu clave de OpenAI.</p>
+                    <details style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                        <summary style="font-weight: bold; cursor: pointer;">¿Cuánto cuesta VoiceScribe?</summary>
+                        <p style="margin-top: 10px;">La extensión de VoiceScribe y todas sus funciones de transcripción son completamente gratis y no tienen anuncios. La función de resúmenes con IA es opcional y utiliza tu propia clave de OpenAI, por lo que cualquier costo asociado es directamente con OpenAI, según tu plan y consumo. Nosotros no te cobraremos nada.</p>
                     </details>
-                    <details class="faq-item">
-                        <summary data-translate-key="faq_2_q">¿Se envía mi audio a la nube?</summary>
-                        <p data-translate-key="faq_2_a">No. El audio se procesa localmente por el navegador.</p>
+
+                    <details style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                        <summary style="font-weight: bold; cursor: pointer;">¿Qué tan precisa es la transcripción?</summary>
+                        <p style="margin-top: 10px;">La transcripción utiliza la tecnología Web Speech API integrada en tu navegador (como Google Chrome). La precisión es generalmente muy alta para un dictado claro, pero puede variar según el ruido de fondo, la velocidad al hablar y el acento. Te recomendamos hablar de forma clara y cerca del micrófono.</p>
                     </details>
-                    <details class="faq-item">
-                        <summary data-translate-key="faq_3_q">¿Qué idiomas soporta?</summary>
-                        <p data-translate-key="faq_3_a">Funciona mejor en español y otros idiomas soportados por el navegador.</p>
+
+                    <details style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                        <summary style="font-weight: bold; cursor: pointer;">¿Puedo editar el texto después de transcribirlo?</summary>
+                        <p style="margin-top: 10px;">Sí. El texto aparece en un editor donde puedes corregir, añadir o eliminar cualquier parte antes de generar un resumen o exportar tus notas. Tienes control total sobre el resultado final.</p>
                     </details>
-                    <details class="faq-item">
-                        <summary data-translate-key="faq_4_q">¿Dónde se guardan mis notas?</summary>
-                        <p data-translate-key="faq_4_a">En tu equipo mediante almacenamiento local de Chrome.</p>
+
+                    <details style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                        <summary style="font-weight: bold; cursor: pointer;">¿Funciona en otros idiomas además del español?</summary>
+                        <p style="margin-top: 10px;">Actualmente, la extensión está optimizada para español. Sin embargo, la tecnología subyacente del navegador puede reconocer otros idiomas. Estamos trabajando para añadir un selector de idioma explícito en futuras actualizaciones.</p>
                     </details>
-                     <details class="faq-item">
-                        <summary data-translate-key="faq_5_q">¿Necesito cuenta?</summary>
-                        <p data-translate-key="faq_5_a">No. Solo necesitas tu clave de OpenAI si decides usar la IA.</p>
+
+                    <details style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                        <summary style="font-weight: bold; cursor: pointer;">¿Puede transcribir el audio de un video de YouTube o una llamada de Zoom?</summary>
+                        <p style="margin-top: 10px;">No directamente. VoiceScribe está diseñado para transcribir el audio que captura desde tu micrófono. No puede procesar el audio interno de otras pestañas o aplicaciones. Para transcribir una reunión, por ejemplo, tendrías que usar el audio de tus altavoces y capturarlo con tu micrófono, lo cual podría reducir la calidad.</p>
+                    </details>
+
+                    <details style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                        <summary style="font-weight: bold; cursor: pointer;">¿Mis datos están seguros?</summary>
+                        <p style="margin-top: 10px;">Sí. Todo el procesamiento de audio y texto se realiza localmente en tu navegador. Si usas la IA, el texto se envía de forma segura a OpenAI con tu propia clave; nosotros no almacenamos ni tenemos acceso a esa información.</p>
+                    </details>
+
+                    <details style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                        <summary style="font-weight: bold; cursor: pointer;">¿Necesito una cuenta para usar VoiceScribe?</summary>
+                        <p style="margin-top: 10px;">No. La extensión funciona sin necesidad de registro para proteger tu privacidad y agilizar el uso.</p>
+                    </details>
+
+                    <details style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                        <summary style="font-weight: bold; cursor: pointer;">¿Qué navegadores son compatibles?</summary>
+                        <p style="margin-top: 10px;">Cualquier navegador basado en Chromium como Google Chrome o Microsoft Edge (versión 106 en adelante) es compatible.</p>
                     </details>
                 </div>
             </div>
@@ -705,6 +949,10 @@
     <footer class="footer">
         <div class="container">
             <p data-translate-key="footer_text">&copy; 2024 VoiceScribe. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="privacy.html" data-translate-key="footer_privacy">Política de Privacidad</a>
+                <a href="terms.html" data-translate-key="footer_terms">Términos de Servicio</a>
+            </div>
             <div class="lang-switcher">
                 <button id="lang-es">ES</button>
                 <button id="lang-en">EN</button>
@@ -766,27 +1014,68 @@
                 es: {
                     seo_title: "VoiceScribe — Transcripción de voz + Resumen IA",
                     seo_description: "Convierte tu voz en texto en tiempo real y genera resúmenes con IA. Rápido, privado y gratis.",
+                    nav_use_cases: "Casos de uso",
                     nav_features: "Características",
                     nav_how: "Cómo funciona",
                     nav_requirements: "Requisitos",
                     nav_faq: "FAQs",
+                    nav_pricing: "Precios / IA",
                     nav_privacy: "Privacidad",
                     nav_support: "Soporte",
                     nav_cta: "Añadir a Chrome",
-                    hero_h1: "Transcribe tu voz y obtén resúmenes al instante",
-                    hero_sub: "Habla, edita y comparte en segundos. Tu contenido se mantiene en tu dispositivo; la IA es opcional.",
-                    hero_cta_primary: "Añadir a Chrome",
-                    hero_cta_secondary: "Ver cómo funciona",
-                    hero_media_alt: "Vista previa de VoiceScribe en uso",
-                    features_title: "Todo lo que necesitas para tomar notas con la voz",
-                    feature_1_title: "Transcripción en tiempo real",
-                    feature_1_text: "Convierte tu voz a texto al momento con detección de frases.",
-                    feature_2_title: "Resumen con IA",
-                    feature_2_text: "Obtén resúmenes claros en estilos general, puntos clave o detallado.",
-                    feature_3_title: "Exporta y comparte",
-                    feature_3_text: "Guarda como TXT o copia al portapapeles en un clic.",
-                    feature_4_title: "Privacidad primero",
-                    feature_4_text: "El audio no se sube. La IA es opcional y usa tu clave.",
+                    hero_h1: "Transcripción y resúmenes al instante, con o sin IA.",
+                    hero_sub: "Convierte tu voz en texto y obtén resúmenes inteligentes. Funciona de forma local y privada, o conéctalo a tu cuenta de OpenAI para potenciarlo. Tú decides.",
+                    hero_cta_primary: "Añadir a Chrome — Es Gratis",
+                    hero_cta_secondary: "¿Cómo funciona la IA?",
+                    hero_media_alt: "Vista previa (reemplaza por GIF o video mostrando el micrófono, texto en tiempo real y resumen)",
+                    use_cases_title: "Ideal para...",
+                    use_cases_student_title: "Estudiante",
+                    use_cases_student_text: "Graba clases y obtén apuntes resumidos al instante.",
+                    use_cases_professional_title: "Profesional",
+                    use_cases_professional_text: "Transcribe reuniones, entrevistas o llamadas y extrae los puntos clave en segundos.",
+                    use_cases_creator_title: "Creador de contenido",
+                    use_cases_creator_text: "Dicta ideas para guiones, artículos o briefings y obtén un borrador al momento.",
+                    use_cases_anyone_title: "Notas rápidas",
+                    use_cases_anyone_text: "Captura tus pensamientos sin cambiar de contexto mientras trabajas.",
+                    features_title: "Potencia tu Productividad con Funciones Inteligentes",
+                    features_sub: "Diseñado para ser rápido, privado y darte el control total.",
+                    feature_1_title: "Transcripción en Tiempo Real",
+                    feature_1_text: "Habla y mira cómo tus palabras se convierten en texto al instante. Ideal para capturar ideas sobre la marcha sin interrumpir tu flujo de trabajo.",
+                    feature_2_title: "Resúmenes con IA",
+                    feature_2_text: "Transforma textos largos en resúmenes claros, puntos clave o listas detalladas. Ahorra horas de revisión y análisis.",
+                    feature_3_title: "Exporta y Comparte",
+                    feature_3_text: "Guarda tus transcripciones completas o resúmenes como archivo .TXT o cópialos directamente a tu portapapeles con un solo clic.",
+                    feature_4_title: "Privacidad por Diseño",
+                    feature_4_text: "Tu voz y tus textos se procesan localmente en tu navegador. Nada se sube a nuestros servidores. Tus datos son solo tuyos.",
+                    feature_5_title: "Control Total de la IA",
+                    feature_5_text: "Usa tu propia clave de OpenAI para activar las funciones inteligentes. Sin suscripciones. Tú controlas el uso y los costos.",
+                    feature_6_title: "Funciona sin Conexión",
+                    feature_6_text: "La función de transcripción de voz a texto está disponible incluso sin conexión a internet, para que puedas tomar notas en cualquier lugar.",
+                    feature_1_b1: "Compatible con puntuación automática y conteo en vivo.",
+                    feature_1_b2: "Edición directa mientras hablas.",
+                    feature_1_b3: "Optimizado para bajo uso de CPU.",
+                    feature_2_b1: "Varios estilos: general, bullets o detallado.",
+                    feature_2_b2: "Elige modelo y longitud del resultado.",
+                    feature_2_b3: "Todo bajo tu propia clave de OpenAI.",
+                    feature_3_b1: "Exportación .TXT limpia y ordenada.",
+                    feature_3_b2: "Copiado rápido con formato conservado.",
+                    feature_3_b3: "Atajos de teclado para mayor velocidad.",
+                    feature_4_b1: "Procesamiento local en el navegador.",
+                    feature_4_b2: "Sin telemetría ni tracking oculto.",
+                    feature_4_b3: "Controlas qué se guarda y cuándo borrar.",
+                    feature_5_b1: "Configura tu clave API en segundos.",
+                    feature_5_b2: "Límites y costos bajo tu control.",
+                    feature_5_b3: "Funciona sin IA si así lo prefieres.",
+                    feature_6_b1: "Ideal para viajes o zonas con mala señal.",
+                    feature_6_b2: "No depende de servidores externos.",
+                    feature_6_b3: "Reintentos y guardado local seguros.",
+                    pricing_title: "Gratis y transparente: tú tienes el control de la IA",
+                    pricing_intro_1: "VoiceScribe es gratis. Puedes usar la transcripción en tiempo real y las funciones de exportación sin costo alguno.",
+                    pricing_ai_title: "¿Y los resúmenes con IA?",
+                    pricing_ai_text: "La función de resúmenes avanzados es opcional. Para usarla, solo necesitas agregar tu propia clave API de OpenAI.",
+                    pricing_benefit_1: "✅ Sin suscripciones ocultas: no te cobramos nada.",
+                    pricing_benefit_2: "✅ Control total: usas tu propia cuenta de OpenAI y solo pagas lo que consumas con ellos.",
+                    pricing_benefit_3: "✅ Funciona sin clave: si no quieres usar IA, la extensión sigue siendo 100% funcional.",
                     how_title: "Cómo funciona",
                     how_step_1_title: "Inicia la grabación",
                     how_step_1_text: "Concede acceso al micrófono y pulsa “Iniciar”.",
@@ -808,16 +1097,14 @@
                     screens_2_alt: "Texto transcrito en pantalla",
                     screens_3_alt: "Generación de resumen con IA",
                     faq_title: "Preguntas frecuentes",
-                    faq_1_q: "¿La extensión es gratis?",
-                    faq_1_a: "Sí. La transcripción es gratuita. La IA es opcional y usa tu clave de OpenAI.",
-                    faq_2_q: "¿Se envía mi audio a la nube?",
-                    faq_2_a: "No. El audio se procesa localmente por el navegador.",
-                    faq_3_q: "¿Qué idiomas soporta?",
-                    faq_3_a: "Funciona mejor en español y otros idiomas soportados por el navegador.",
-                    faq_4_q: "¿Dónde se guardan mis notas?",
-                    faq_4_a: "En tu equipo mediante almacenamiento local de Chrome.",
-                    faq_5_q: "¿Necesito cuenta?",
-                    faq_5_a: "No. Solo necesitas tu clave de OpenAI si decides usar la IA.",
+                    faq_acc_q: "¿Necesito una cuenta para usar VoiceScribe?",
+                    faq_acc_a: "No. La extensión funciona sin necesidad de registro.",
+                    faq_security_q: "¿Mis datos están seguros?",
+                    faq_security_a: "Sí. Todo el procesamiento de audio y texto se realiza localmente en tu navegador. Si usas la IA, el texto se envía de forma segura a OpenAI con tu propia clave; nosotros no lo almacenamos.",
+                    faq_ai_req_q: "¿Qué necesito para usar la IA?",
+                    faq_ai_req_a: "Solo necesitas una clave API de OpenAI. La agregas en la configuración de la extensión.",
+                    faq_browsers_q: "¿Qué navegadores son compatibles?",
+                    faq_browsers_a: "Cualquier navegador basado en Chromium como Google Chrome o Microsoft Edge (versión 106+).",
                     privacy_title: "Política de privacidad",
                     privacy_summary_title: "Resumen",
                     privacy_summary_text: "No recopilamos datos personales. El texto transcrito y los resúmenes se guardan localmente en tu navegador.",
@@ -837,32 +1124,75 @@
                     support_contact_text: 'Para cualquier otro problema o sugerencia, no dudes en escribir a <a href="mailto:soporte@example.com">soporte@example.com</a>.',
                     cta_title: "Captura ideas sin fricción",
                     cta_button: "Añadir a Chrome",
-                    footer_text: "&copy; 2024 VoiceScribe. Todos los derechos reservados."
+                    footer_text: "&copy; 2024 VoiceScribe. Todos los derechos reservados.",
+                    footer_privacy: "Política de Privacidad",
+                    footer_terms: "Términos de Servicio"
                 },
                 en: {
                     seo_title: "VoiceScribe — Voice Transcription + AI Summary",
                     seo_description: "Turn your voice into real-time text and generate AI summaries. Fast, private, and free.",
+                    nav_use_cases: "Use cases",
                     nav_features: "Features",
                     nav_how: "How it Works",
                     nav_requirements: "Requirements",
                     nav_faq: "FAQs",
+                    nav_pricing: "Pricing / AI",
                     nav_privacy: "Privacy",
                     nav_support: "Support",
                     nav_cta: "Add to Chrome",
-                    hero_h1: "Transcribe your voice and get summaries instantly",
-                    hero_sub: "Speak, edit, and share in seconds. Your content stays on your device; AI is optional.",
-                    hero_cta_primary: "Add to Chrome",
-                    hero_cta_secondary: "See how it works",
-                    hero_media_alt: "Preview of VoiceScribe in use",
-                    features_title: "Everything you need for voice note-taking",
+                    hero_h1: "Instant transcription and summaries, with or without AI.",
+                    hero_sub: "Turn your voice into text and get smart summaries. Works locally and privately, or connect your own OpenAI account for extra power. You decide.",
+                    hero_cta_primary: "Add to Chrome — It's Free",
+                    hero_cta_secondary: "How does the AI work?",
+                    hero_media_alt: "Preview (replace with GIF or video showing mic, live text and summary)",
+                    use_cases_title: "Perfect for...",
+                    use_cases_student_title: "Students",
+                    use_cases_student_text: "Record lectures and get instant summarized notes.",
+                    use_cases_professional_title: "Professionals",
+                    use_cases_professional_text: "Transcribe meetings, interviews or calls and extract key points in seconds.",
+                    use_cases_creator_title: "Content creators",
+                    use_cases_creator_text: "Dictate ideas for scripts, articles or briefs and get a draft right away.",
+                    use_cases_anyone_title: "Quick notes",
+                    use_cases_anyone_text: "Capture thoughts without context switching while you work.",
+                    features_title: "Boost your productivity with intelligent features",
+                    features_sub: "Designed to be fast, private, and give you full control.",
                     feature_1_title: "Real-time Transcription",
-                    feature_1_text: "Convert your voice to text instantly with phrase detection.",
-                    feature_2_title: "AI-Powered Summary",
-                    feature_2_text: "Get clear summaries in general, key points, or detailed styles.",
+                    feature_1_text: "Speak and watch your words turn into text instantly. Perfect for capturing ideas on the go without breaking your flow.",
+                    feature_2_title: "AI Summaries",
+                    feature_2_text: "Turn long text into clear summaries, key points, or detailed lists. Save hours of review and analysis.",
                     feature_3_title: "Export and Share",
-                    feature_3_text: "Save as TXT or copy to clipboard in one click.",
-                    feature_4_title: "Privacy First",
-                    feature_4_text: "Audio is not uploaded. AI is optional and uses your own key.",
+                    feature_3_text: "Save your full transcriptions or summaries as a .TXT file, or copy them to your clipboard with one click.",
+                    feature_4_title: "Privacy by Design",
+                    feature_4_text: "Your voice and text are processed locally in your browser. Nothing is uploaded to our servers. Your data is yours alone.",
+                    feature_5_title: "Full AI Control",
+                    feature_5_text: "Use your own OpenAI key to enable smart features. No subscriptions. You control usage and costs.",
+                    feature_6_title: "Works Offline",
+                    feature_6_text: "Speech-to-text works even without an internet connection, so you can take notes anywhere.",
+                    feature_1_b1: "Supports auto punctuation and live word count.",
+                    feature_1_b2: "Edit on the fly while you speak.",
+                    feature_1_b3: "Optimized for low CPU usage.",
+                    feature_2_b1: "Multiple styles: general, bullets, or detailed.",
+                    feature_2_b2: "Choose model and output length.",
+                    feature_2_b3: "All under your own OpenAI key.",
+                    feature_3_b1: ".TXT export that stays clean and tidy.",
+                    feature_3_b2: "Fast copy with formatting preserved.",
+                    feature_3_b3: "Keyboard shortcuts for extra speed.",
+                    feature_4_b1: "Local in-browser processing.",
+                    feature_4_b2: "No telemetry or hidden tracking.",
+                    feature_4_b3: "You control what to keep and when to erase.",
+                    feature_5_b1: "Set up your API key in seconds.",
+                    feature_5_b2: "Usage and costs fully under your control.",
+                    feature_5_b3: "Works great even without AI.",
+                    feature_6_b1: "Perfect for travel or poor connection areas.",
+                    feature_6_b2: "No dependency on external servers.",
+                    feature_6_b3: "Safe retries and local saving.",
+                    pricing_title: "Free and transparent: you control the AI",
+                    pricing_intro_1: "VoiceScribe is free. You can use real-time transcription and export features at no cost.",
+                    pricing_ai_title: "What about AI summaries?",
+                    pricing_ai_text: "Advanced summaries are optional. To use them, just add your own OpenAI API key.",
+                    pricing_benefit_1: "✅ No hidden subscriptions: we don't charge you.",
+                    pricing_benefit_2: "✅ Full control: use your own OpenAI account and pay only for what you consume with them.",
+                    pricing_benefit_3: "✅ Works without a key: the extension remains fully functional without AI.",
                     how_title: "How it Works",
                     how_step_1_title: "Start Recording",
                     how_step_1_text: "Grant microphone access and press “Start”.",
@@ -884,16 +1214,14 @@
                     screens_2_alt: "Transcribed text on screen",
                     screens_3_alt: "AI summary generation",
                     faq_title: "Frequently Asked Questions",
-                    faq_1_q: "Is the extension free?",
-                    faq_1_a: "Yes. Transcription is free. The AI feature is optional and uses your own OpenAI key.",
-                    faq_2_q: "Is my audio sent to the cloud?",
-                    faq_2_a: "No. The audio is processed locally by your browser.",
-                    faq_3_q: "What languages are supported?",
-                    faq_3_a: "It works best in English and other languages supported by the browser.",
-                    faq_4_q: "Where are my notes saved?",
-                    faq_4_a: "On your computer using Chrome's local storage.",
-                    faq_5_q: "Do I need an account?",
-                    faq_5_a: "No. You only need your OpenAI key if you decide to use the AI feature.",
+                    faq_acc_q: "Do I need an account to use VoiceScribe?",
+                    faq_acc_a: "No. The extension works without registration.",
+                    faq_security_q: "Is my data safe?",
+                    faq_security_a: "Yes. All audio and text processing happens locally in your browser. If you use AI, text is sent securely to OpenAI with your own key; we don't store it.",
+                    faq_ai_req_q: "What do I need to use the AI?",
+                    faq_ai_req_a: "You only need an OpenAI API key. Add it in the extension settings.",
+                    faq_browsers_q: "Which browsers are supported?",
+                    faq_browsers_a: "Any Chromium-based browser like Google Chrome or Microsoft Edge (version 106+).",
                     privacy_title: "Privacy Policy",
                     privacy_summary_title: "Summary",
                     privacy_summary_text: "We do not collect personal data. The transcribed text and summaries are stored locally in your browser.",
@@ -913,7 +1241,9 @@
                     support_contact_text: 'For any other issues or suggestions, feel free to write to <a href="mailto:soporte@example.com">support@example.com</a>.',
                     cta_title: "Capture ideas without friction",
                     cta_button: "Add to Chrome",
-                    footer_text: "&copy; 2024 VoiceScribe. All rights reserved."
+                    footer_text: "&copy; 2024 VoiceScribe. All rights reserved.",
+                    footer_privacy: "Privacy Policy",
+                    footer_terms: "Terms of Service"
                 }
             };
 
