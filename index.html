@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate-key="seo_title">VoiceScribe — Transcripción de voz + Resumen IA</title>
+    <meta name="description" data-translate-key="seo_description" content="Convierte tu voz en texto en tiempo real y genera resúmenes con IA. Rápido, privado y gratis.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎙️</text></svg>">
+    
+    <style>
+        /* --- Reset & Base Styles --- */
+        :root {
+            --primary-color: #6d28d9;
+            --primary-color-light: #8b5cf6;
+            --secondary-color: #f3f4f6;
+            --text-color: #1f2937;
+            --text-color-light: #6b7280;
+            --white-color: #ffffff;
+            --border-color: #e5e7eb;
+            --header-height: 80px;
+            --border-radius: 0.75rem;
+            --box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --box-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--white-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+        
+        .btn-primary:hover {
+             background-color: var(--primary-color-light);
+        }
+
+        .btn-secondary {
+            background-color: var(--white-color);
+            color: var(--primary-color);
+            border-color: var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .nav-brand {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            flex-shrink: 0; /* Prevents the brand from shrinking */
+        }
+
+        .nav-center {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-list {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color-light);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .nav-right {
+            flex-shrink: 0;
+        }
+        
+        .nav-toggle {
+            display: none;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            z-index: 1001;
+            padding: 10px;
+        }
+        
+        .nav-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin: 6px 0;
+            transition: all 0.3s ease-in-out;
+            border-radius: 2px;
+        }
+
+        .nav-mobile-menu {
+            display: none;
+            position: absolute;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            background-color: var(--white-color);
+            flex-direction: column;
+            gap: 0;
+            box-shadow: var(--box-shadow);
+            border-top: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .nav-mobile-menu.active {
+            display: flex;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding-top: 100px;
+            padding-bottom: 120px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--white-color) 80%, var(--secondary-color) 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            max-width: 850px;
+            margin: 0 auto 20px;
+            line-height: 1.2;
+            background: -webkit-linear-gradient(45deg, #333, var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .sub {
+            font-size: 1.25rem;
+            color: var(--text-color-light);
+            max-width: 650px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .hero-media {
+            margin: 0 auto;
+            max-width: 800px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-lg);
+            overflow: hidden;
+        }
+        
+        .hero-media img {
+            width: 100%;
+            display: block;
+        }
+
+        /* --- Features Section --- */
+        #features {
+            background-color: var(--secondary-color);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background-color: var(--white-color);
+            padding: 35px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* --- How It Works Section --- */
+        .how-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            text-align: center;
+            position: relative;
+        }
+        .how-step {
+            flex: 1;
+            padding: 20px;
+        }
+        .how-step h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-color-light));
+            color: var(--white-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 0 8px var(--secondary-color);
+        }
+
+        /* --- Requirements Section --- */
+        #requirements {
+            background-color: var(--secondary-color);
+        }
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .requirement-item {
+            background-color: var(--white-color);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        .requirement-item h3 {
+             font-size: 1.3rem;
+             font-weight: 700;
+             margin-bottom: 10px;
+        }
+        
+        /* --- Screens Section --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        /* --- FAQ Section --- */
+        .faq-container {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+        }
+        .faq-item summary {
+            padding: 20px 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 40px;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        .faq-item[open] summary::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .faq-item p {
+            padding: 0 10px 20px;
+            color: var(--text-color-light);
+        }
+
+        /* --- Privacy & Support Section --- */
+        #privacy, #support {
+            background-color: var(--secondary-color);
+        }
+        .content-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white-color);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        .content-box h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; }
+        .content-box ul { list-style-position: inside; margin-bottom: 20px; padding-left: 10px; }
+        .content-box li { margin-bottom: 10px; color: var(--text-color-light); }
+        .content-box a { color: var(--primary-color); text-decoration: none; font-weight: 500;}
+        .content-box a:hover { text-decoration: underline; }
+        
+        /* --- CTA Section --- */
+        #cta {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-align: center;
+        }
+        #cta .section-title { color: var(--white-color); font-size: 2.5rem; }
+        #cta .btn {
+            background-color: var(--white-color);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            padding: 15px 40px;
+        }
+        
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+        .lang-switcher { margin-top: 20px; }
+        .lang-switcher button {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color-light);
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: all 0.2s ease;
+        }
+        .lang-switcher button.active,
+        .lang-switcher button:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border-color: var(--primary-color);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .nav-center, .nav-right {
+                display: none;
+            }
+            .nav-toggle {
+                display: block;
+            }
+            .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .nav-toggle.active span:nth-child(2) { opacity: 0; }
+            .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+            
+            .nav-mobile-menu .nav-list {
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+            }
+            .nav-mobile-menu .nav-list li {
+                width: 100%;
+                text-align: center;
+            }
+             .nav-mobile-menu .nav-link {
+                display: block;
+                padding: 15px;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-mobile-menu .nav-cta {
+                margin: 20px auto 0;
+                display: block;
+                width: fit-content;
+            }
+
+            .hero h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2.2rem; }
+            .requirements-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-ctas { flex-direction: column; align-items: center; }
+            .how-steps { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="nav-brand">VoiceScribe</a>
+                
+                <div class="nav-center">
+                    <ul class="nav-list">
+                        <li><a href="#features" class="nav-link" data-translate-key="nav_features">Características</a></li>
+                        <li><a href="#how" class="nav-link" data-translate-key="nav_how">Cómo funciona</a></li>
+                        <li><a href="#requirements" class="nav-link" data-translate-key="nav_requirements">Requisitos</a></li>
+                        <li><a href="#faq" class="nav-link" data-translate-key="nav_faq">FAQs</a></li>
+                        <li><a href="#privacy" class="nav-link" data-translate-key="nav_privacy">Privacidad</a></li>
+                        <li><a href="#support" class="nav-link" data-translate-key="nav_support">Soporte</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-right">
+                     <a href="#cta" class="btn btn-primary nav-cta" data-translate-key="nav_cta">Añadir a Chrome</a>
+                </div>
+
+                <button class="nav-toggle" id="navToggle" aria-label="Menu toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="nav-mobile-menu" id="navMobileMenu">
+             <ul class="nav-list">
+                <li><a href="#features" class="nav-link" data-translate-key="nav_features">Características</a></li>
+                <li><a href="#how" class="nav-link" data-translate-key="nav_how">Cómo funciona</a></li>
+                <li><a href="#requirements" class="nav-link" data-translate-key="nav_requirements">Requisitos</a></li>
+                <li><a href="#faq" class="nav-link" data-translate-key="nav_faq">FAQs</a></li>
+                <li><a href="#privacy" class="nav-link" data-translate-key="nav_privacy">Privacidad</a></li>
+                <li><a href="#support" class="nav-link" data-translate-key="nav_support">Soporte</a></li>
+            </ul>
+            <a href="#cta" class="btn btn-primary nav-cta" data-translate-key="nav_cta">Añadir a Chrome</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 data-translate-key="hero_h1">Transcribe tu voz y obtén resúmenes al instante</h1>
+                <p class="sub" data-translate-key="hero_sub">Habla, edita y comparte en segundos. Tu contenido se mantiene en tu dispositivo; la IA es opcional.</p>
+                <div class="hero-ctas">
+                    <a href="#requirements" class="btn btn-primary" data-translate-key="hero_cta_primary">Añadir a Chrome</a>
+                    <a href="#how" class="btn btn-secondary" data-translate-key="hero_cta_secondary">Ver cómo funciona</a>
+                </div>
+                <div class="hero-media">
+                    <img src="https://placehold.co/800x450/6d28d9/ffffff?text=Vista+previa+de+VoiceScribe" alt="Vista previa de VoiceScribe en uso" loading="lazy" data-translate-key="hero_media_alt">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="features_title">Todo lo que necesitas para tomar notas con la voz</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 data-translate-key="feature_1_title">Transcripción en tiempo real</h3>
+                        <p data-translate-key="feature_1_text">Convierte tu voz a texto al momento con detección de frases.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-translate-key="feature_2_title">Resumen con IA</h3>
+                        <p data-translate-key="feature_2_text">Obtén resúmenes claros en estilos general, puntos clave o detallado.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-translate-key="feature_3_title">Exporta y comparte</h3>
+                        <p data-translate-key="feature_3_text">Guarda como TXT o copia al portapapeles en un clic.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 data-translate-key="feature_4_title">Privacidad primero</h3>
+                        <p data-translate-key="feature_4_text">El audio no se sube. La IA es opcional y usa tu clave.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="how_title">Cómo funciona</h2>
+                <div class="how-steps">
+                    <div class="how-step">
+                        <div class="step-number">1</div>
+                        <h3 data-translate-key="how_step_1_title">Inicia la grabación</h3>
+                        <p data-translate-key="how_step_1_text">Concede acceso al micrófono y pulsa “Iniciar”.</p>
+                    </div>
+                    <div class="how-step">
+                        <div class="step-number">2</div>
+                        <h3 data-translate-key="how_step_2_title">Revisa el texto</h3>
+                        <p data-translate-key="how_step_2_text">Edita mientras ves el conteo de palabras en vivo.</p>
+                    </div>
+                    <div class="how-step">
+                        <div class="step-number">3</div>
+                        <h3 data-translate-key="how_step_3_title">Resume y exporta</h3>
+                        <p data-translate-key="how_step_3_text">Genera un resumen con IA y guarda o copia tu nota.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Requirements Section -->
+        <section id="requirements">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="req_title">Requisitos y permisos</h2>
+                <div class="requirements-grid">
+                    <div class="requirement-item">
+                        <h3 data-translate-key="req_1_title">Navegador</h3>
+                        <p data-translate-key="req_1_text">Chrome 109+ o Edge 109+ con soporte de reconocimiento de voz.</p>
+                    </div>
+                    <div class="requirement-item">
+                        <h3 data-translate-key="req_2_title">Permisos</h3>
+                        <p data-translate-key="req_2_text">Micrófono (del navegador), almacenamiento local y ventana auxiliar para permisos.</p>
+                    </div>
+                    <div class="requirement-item">
+                        <h3 data-translate-key="req_3_title">Conexión</h3>
+                        <p data-translate-key="req_3_text">Internet solo para la función de resumen con IA (opcional).</p>
+                    </div>
+                    <div class="requirement-item">
+                        <h3 data-translate-key="req_4_title">Privacidad</h3>
+                        <p data-translate-key="req_4_text">El texto se guarda localmente. Consulta la política de privacidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screens Section -->
+        <section id="screens">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="screens_title">Una interfaz simple para trabajar rápido</h2>
+                <div class="gallery-grid">
+                    <img src="https://placehold.co/600x400/f3f4f6/1f2937?text=Interfaz+de+grabación" alt="Interfaz de grabación" loading="lazy" data-translate-key="screens_1_alt">
+                    <img src="https://placehold.co/600x400/f3f4f6/1f2937?text=Texto+transcrito" alt="Texto transcrito en pantalla" loading="lazy" data-translate-key="screens_2_alt">
+                    <img src="https://placehold.co/600x400/f3f4f6/1f2937?text=Resumen+con+IA" alt="Generación de resumen con IA" loading="lazy" data-translate-key="screens_3_alt">
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="faq_title">Preguntas frecuentes</h2>
+                <div class="faq-container">
+                    <details class="faq-item">
+                        <summary data-translate-key="faq_1_q">¿La extensión es gratis?</summary>
+                        <p data-translate-key="faq_1_a">Sí. La transcripción es gratuita. La IA es opcional y usa tu clave de OpenAI.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary data-translate-key="faq_2_q">¿Se envía mi audio a la nube?</summary>
+                        <p data-translate-key="faq_2_a">No. El audio se procesa localmente por el navegador.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary data-translate-key="faq_3_q">¿Qué idiomas soporta?</summary>
+                        <p data-translate-key="faq_3_a">Funciona mejor en español y otros idiomas soportados por el navegador.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary data-translate-key="faq_4_q">¿Dónde se guardan mis notas?</summary>
+                        <p data-translate-key="faq_4_a">En tu equipo mediante almacenamiento local de Chrome.</p>
+                    </details>
+                     <details class="faq-item">
+                        <summary data-translate-key="faq_5_q">¿Necesito cuenta?</summary>
+                        <p data-translate-key="faq_5_a">No. Solo necesitas tu clave de OpenAI si decides usar la IA.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Privacy Policy Section -->
+        <section id="privacy">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="privacy_title">Política de privacidad</h2>
+                <div class="content-box">
+                    <h3 data-translate-key="privacy_summary_title">Resumen</h3>
+                    <p data-translate-key="privacy_summary_text">No recopilamos datos personales. El texto transcrito y los resúmenes se guardan localmente en tu navegador.</p>
+                    <br>
+                    <h3 data-translate-key="privacy_data_title">Datos procesados</h3>
+                    <ul>
+                        <li data-translate-key="privacy_data_1"><strong>Audio del micrófono:</strong> Se usa localmente para convertir voz a texto. No se envía a ningún servidor.</li>
+                        <li data-translate-key="privacy_data_2"><strong>Texto transcrito y resúmenes:</strong> Se guardan en el almacenamiento local de tu navegador para tu comodidad.</li>
+                        <li data-translate-key="privacy_data_3"><strong>Servicio opcional de IA:</strong> Si introduces tu clave, el texto se envía a api.openai.com solo para generar el resumen.</li>
+                    </ul>
+                     <h3 data-translate-key="privacy_retention_title">Retención de datos</h3>
+                    <p data-translate-key="privacy_retention_text">Puedes borrar todos los datos desde la propia extensión usando el botón “Limpiar Todo”. Al desinstalar la extensión, se eliminan todos los datos locales asociados.</p>
+                    <br>
+                    <h3 data-translate-key="privacy_contact_title">Contacto</h3>
+                    <p data-translate-key="privacy_contact_text">Si tienes dudas, contáctanos en <a href="mailto:soporte@example.com">soporte@example.com</a>.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Support Section -->
+        <section id="support">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="support_title">Soporte</h2>
+                 <div class="content-box">
+                    <h3 data-translate-key="support_fixes_title">Soluciones rápidas</h3>
+                    <ul>
+                        <li data-translate-key="support_fixes_1">Asegúrate de haber permitido el acceso al micrófono en la configuración de Chrome: <code>chrome://settings/content/microphone</code></li>
+                        <li data-translate-key="support_fixes_2">Si la IA no responde, verifica tu conexión a internet y que tu clave de OpenAI sea correcta y tenga fondos.</li>
+                    </ul>
+                    <h3 data-translate-key="support_contact_title">Contacto</h3>
+                    <p data-translate-key="support_contact_text">Para cualquier otro problema o sugerencia, no dudes en escribir a <a href="mailto:soporte@example.com">soporte@example.com</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="cta">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="cta_title">Captura ideas sin fricción</h2>
+                <a href="#requirements" class="btn" data-translate-key="cta_button">Añadir a Chrome</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-translate-key="footer_text">&copy; 2024 VoiceScribe. Todos los derechos reservados.</p>
+            <div class="lang-switcher">
+                <button id="lang-es">ES</button>
+                <button id="lang-en">EN</button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Navigation Logic ---
+            const navToggle = document.getElementById('navToggle');
+            const navMobileMenu = document.getElementById('navMobileMenu');
+            const navLinks = document.querySelectorAll('.nav-link, .nav-cta');
+            
+            navToggle.addEventListener('click', () => {
+                navMobileMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (navMobileMenu.classList.contains('active')) {
+                        // Check if the clicked element is inside the mobile menu
+                        if(e.currentTarget.closest('#navMobileMenu')) {
+                           navMobileMenu.classList.remove('active');
+                           navToggle.classList.remove('active');
+                        }
+                    }
+                });
+            });
+
+            // --- Scrollspy Logic ---
+            const sections = document.querySelectorAll('section');
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const scrollNavLinks = document.querySelectorAll('.nav-list .nav-link');
+
+            const activateLink = (id) => {
+                scrollNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activateLink(entry.target.id);
+                    }
+                });
+            }, { rootMargin: `-${headerHeight}px 0px -40% 0px` });
+
+            sections.forEach(section => observer.observe(section));
+
+            // --- Multi-language Logic ---
+            const translations = {
+                es: {
+                    seo_title: "VoiceScribe — Transcripción de voz + Resumen IA",
+                    seo_description: "Convierte tu voz en texto en tiempo real y genera resúmenes con IA. Rápido, privado y gratis.",
+                    nav_features: "Características",
+                    nav_how: "Cómo funciona",
+                    nav_requirements: "Requisitos",
+                    nav_faq: "FAQs",
+                    nav_privacy: "Privacidad",
+                    nav_support: "Soporte",
+                    nav_cta: "Añadir a Chrome",
+                    hero_h1: "Transcribe tu voz y obtén resúmenes al instante",
+                    hero_sub: "Habla, edita y comparte en segundos. Tu contenido se mantiene en tu dispositivo; la IA es opcional.",
+                    hero_cta_primary: "Añadir a Chrome",
+                    hero_cta_secondary: "Ver cómo funciona",
+                    hero_media_alt: "Vista previa de VoiceScribe en uso",
+                    features_title: "Todo lo que necesitas para tomar notas con la voz",
+                    feature_1_title: "Transcripción en tiempo real",
+                    feature_1_text: "Convierte tu voz a texto al momento con detección de frases.",
+                    feature_2_title: "Resumen con IA",
+                    feature_2_text: "Obtén resúmenes claros en estilos general, puntos clave o detallado.",
+                    feature_3_title: "Exporta y comparte",
+                    feature_3_text: "Guarda como TXT o copia al portapapeles en un clic.",
+                    feature_4_title: "Privacidad primero",
+                    feature_4_text: "El audio no se sube. La IA es opcional y usa tu clave.",
+                    how_title: "Cómo funciona",
+                    how_step_1_title: "Inicia la grabación",
+                    how_step_1_text: "Concede acceso al micrófono y pulsa “Iniciar”.",
+                    how_step_2_title: "Revisa el texto",
+                    how_step_2_text: "Edita mientras ves el conteo de palabras en vivo.",
+                    how_step_3_title: "Resume y exporta",
+                    how_step_3_text: "Genera un resumen con IA y guarda o copia tu nota.",
+                    req_title: "Requisitos y permisos",
+                    req_1_title: "Navegador",
+                    req_1_text: "Chrome 109+ o Edge 109+ con soporte de reconocimiento de voz.",
+                    req_2_title: "Permisos",
+                    req_2_text: "Micrófono (del navegador), almacenamiento local y ventana auxiliar para permisos.",
+                    req_3_title: "Conexión",
+                    req_3_text: "Internet solo para la función de resumen con IA (opcional).",
+                    req_4_title: "Privacidad",
+                    req_4_text: "El texto se guarda localmente. Consulta la política de privacidad.",
+                    screens_title: "Una interfaz simple para trabajar rápido",
+                    screens_1_alt: "Interfaz de grabación",
+                    screens_2_alt: "Texto transcrito en pantalla",
+                    screens_3_alt: "Generación de resumen con IA",
+                    faq_title: "Preguntas frecuentes",
+                    faq_1_q: "¿La extensión es gratis?",
+                    faq_1_a: "Sí. La transcripción es gratuita. La IA es opcional y usa tu clave de OpenAI.",
+                    faq_2_q: "¿Se envía mi audio a la nube?",
+                    faq_2_a: "No. El audio se procesa localmente por el navegador.",
+                    faq_3_q: "¿Qué idiomas soporta?",
+                    faq_3_a: "Funciona mejor en español y otros idiomas soportados por el navegador.",
+                    faq_4_q: "¿Dónde se guardan mis notas?",
+                    faq_4_a: "En tu equipo mediante almacenamiento local de Chrome.",
+                    faq_5_q: "¿Necesito cuenta?",
+                    faq_5_a: "No. Solo necesitas tu clave de OpenAI si decides usar la IA.",
+                    privacy_title: "Política de privacidad",
+                    privacy_summary_title: "Resumen",
+                    privacy_summary_text: "No recopilamos datos personales. El texto transcrito y los resúmenes se guardan localmente en tu navegador.",
+                    privacy_data_title: "Datos procesados",
+                    privacy_data_1: "<strong>Audio del micrófono:</strong> Se usa localmente para convertir voz a texto. No se envía a ningún servidor.",
+                    privacy_data_2: "<strong>Texto transcrito y resúmenes:</strong> Se guardan en el almacenamiento local de tu navegador para tu comodidad.",
+                    privacy_data_3: "<strong>Servicio opcional de IA:</strong> Si introduces tu clave, el texto se envía a api.openai.com solo para generar el resumen.",
+                    privacy_retention_title: "Retención de datos",
+                    privacy_retention_text: "Puedes borrar todos los datos desde la propia extensión usando el botón “Limpiar Todo”. Al desinstalar la extensión, se eliminan todos los datos locales asociados.",
+                    privacy_contact_title: "Contacto",
+                    privacy_contact_text: 'Si tienes dudas, contáctanos en <a href="mailto:soporte@example.com">soporte@example.com</a>.',
+                    support_title: "Soporte",
+                    support_fixes_title: "Soluciones rápidas",
+                    support_fixes_1: "Asegúrate de haber permitido el acceso al micrófono en la configuración de Chrome: <code>chrome://settings/content/microphone</code>",
+                    support_fixes_2: "Si la IA no responde, verifica tu conexión a internet y que tu clave de OpenAI sea correcta y tenga fondos.",
+                    support_contact_title: "Contacto",
+                    support_contact_text: 'Para cualquier otro problema o sugerencia, no dudes en escribir a <a href="mailto:soporte@example.com">soporte@example.com</a>.',
+                    cta_title: "Captura ideas sin fricción",
+                    cta_button: "Añadir a Chrome",
+                    footer_text: "&copy; 2024 VoiceScribe. Todos los derechos reservados."
+                },
+                en: {
+                    seo_title: "VoiceScribe — Voice Transcription + AI Summary",
+                    seo_description: "Turn your voice into real-time text and generate AI summaries. Fast, private, and free.",
+                    nav_features: "Features",
+                    nav_how: "How it Works",
+                    nav_requirements: "Requirements",
+                    nav_faq: "FAQs",
+                    nav_privacy: "Privacy",
+                    nav_support: "Support",
+                    nav_cta: "Add to Chrome",
+                    hero_h1: "Transcribe your voice and get summaries instantly",
+                    hero_sub: "Speak, edit, and share in seconds. Your content stays on your device; AI is optional.",
+                    hero_cta_primary: "Add to Chrome",
+                    hero_cta_secondary: "See how it works",
+                    hero_media_alt: "Preview of VoiceScribe in use",
+                    features_title: "Everything you need for voice note-taking",
+                    feature_1_title: "Real-time Transcription",
+                    feature_1_text: "Convert your voice to text instantly with phrase detection.",
+                    feature_2_title: "AI-Powered Summary",
+                    feature_2_text: "Get clear summaries in general, key points, or detailed styles.",
+                    feature_3_title: "Export and Share",
+                    feature_3_text: "Save as TXT or copy to clipboard in one click.",
+                    feature_4_title: "Privacy First",
+                    feature_4_text: "Audio is not uploaded. AI is optional and uses your own key.",
+                    how_title: "How it Works",
+                    how_step_1_title: "Start Recording",
+                    how_step_1_text: "Grant microphone access and press “Start”.",
+                    how_step_2_title: "Review the Text",
+                    how_step_2_text: "Edit while viewing the live word count.",
+                    how_step_3_title: "Summarize and Export",
+                    how_step_3_text: "Generate an AI summary and save or copy your note.",
+                    req_title: "Requirements & Permissions",
+                    req_1_title: "Browser",
+                    req_1_text: "Chrome 109+ or Edge 109+ with voice recognition support.",
+                    req_2_title: "Permissions",
+                    req_2_text: "Microphone (from browser), local storage, and a popup window for permissions.",
+                    req_3_title: "Connection",
+                    req_3_text: "Internet is only required for the optional AI summary feature.",
+                    req_4_title: "Privacy",
+                    req_4_text: "Text is saved locally. Please see the privacy policy.",
+                    screens_title: "A simple interface to work fast",
+                    screens_1_alt: "Recording interface",
+                    screens_2_alt: "Transcribed text on screen",
+                    screens_3_alt: "AI summary generation",
+                    faq_title: "Frequently Asked Questions",
+                    faq_1_q: "Is the extension free?",
+                    faq_1_a: "Yes. Transcription is free. The AI feature is optional and uses your own OpenAI key.",
+                    faq_2_q: "Is my audio sent to the cloud?",
+                    faq_2_a: "No. The audio is processed locally by your browser.",
+                    faq_3_q: "What languages are supported?",
+                    faq_3_a: "It works best in English and other languages supported by the browser.",
+                    faq_4_q: "Where are my notes saved?",
+                    faq_4_a: "On your computer using Chrome's local storage.",
+                    faq_5_q: "Do I need an account?",
+                    faq_5_a: "No. You only need your OpenAI key if you decide to use the AI feature.",
+                    privacy_title: "Privacy Policy",
+                    privacy_summary_title: "Summary",
+                    privacy_summary_text: "We do not collect personal data. The transcribed text and summaries are stored locally in your browser.",
+                    privacy_data_title: "Data Processed",
+                    privacy_data_1: "<strong>Microphone audio:</strong> Used locally to convert speech to text. It is not sent to any server.",
+                    privacy_data_2: "<strong>Transcribed text and summaries:</strong> Saved in your browser's local storage for your convenience.",
+                    privacy_data_3: "<strong>Optional AI service:</strong> If you enter your key, the text is sent to api.openai.com solely to generate the summary.",
+                    privacy_retention_title: "Data Retention",
+                    privacy_retention_text: "You can delete all data from the extension itself using the “Clear All” button. Uninstalling the extension removes all associated local data.",
+                    privacy_contact_title: "Contact",
+                    privacy_contact_text: 'If you have questions, contact us at <a href="mailto:soporte@example.com">support@example.com</a>.',
+                    support_title: "Support",
+                    support_fixes_title: "Quick Fixes",
+                    support_fixes_1: "Ensure you have allowed microphone access in Chrome's settings: <code>chrome://settings/content/microphone</code>",
+                    support_fixes_2: "If the AI is unresponsive, check your internet connection and ensure your OpenAI key is correct and has funds.",
+                    support_contact_title: "Contact",
+                    support_contact_text: 'For any other issues or suggestions, feel free to write to <a href="mailto:soporte@example.com">support@example.com</a>.',
+                    cta_title: "Capture ideas without friction",
+                    cta_button: "Add to Chrome",
+                    footer_text: "&copy; 2024 VoiceScribe. All rights reserved."
+                }
+            };
+
+            const langEsBtn = document.getElementById('lang-es');
+            const langEnBtn = document.getElementById('lang-en');
+
+            const setLanguage = (lang) => {
+                document.documentElement.lang = lang;
+                document.querySelectorAll('[data-translate-key]').forEach(el => {
+                    const key = el.getAttribute('data-translate-key');
+                    const translation = translations[lang][key];
+                    if (translation) {
+                        if (key.endsWith('_alt')) {
+                            el.setAttribute('alt', translation);
+                        } else if (key.endsWith('_description')) {
+                             el.setAttribute('content', translation);
+                        } else {
+                            el.innerHTML = translation;
+                        }
+                    }
+                });
+                if (lang === 'es') {
+                    langEsBtn.classList.add('active');
+                    langEnBtn.classList.remove('active');
+                } else {
+                    langEnBtn.classList.add('active');
+                    langEsBtn.classList.remove('active');
+                }
+            };
+
+            langEsBtn.addEventListener('click', () => setLanguage('es'));
+            langEnBtn.addEventListener('click', () => setLanguage('en'));
+
+            const userLang = navigator.language || navigator.userLanguage;
+            const initialLang = userLang.startsWith('es') ? 'es' : 'en';
+            setLanguage(initialLang);
+        });
+    </script>
+
+</body>
+</html>
